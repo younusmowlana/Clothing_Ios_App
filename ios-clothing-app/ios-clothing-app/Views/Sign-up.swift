@@ -1,5 +1,5 @@
 //
-//  Sign-in.swift
+//  Sign-up.swift
 //  ios-clothing-app
 //
 //  Created by Kabir Moulana on 3/10/24.
@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct Sign_in: View {
+struct Sign_up: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var userName = ""
+    
     
     @Environment(\.presentationMode) var dismiss
     
     var body: some View {
         NavigationStack{
+            
             
             VStack (alignment: .leading,spacing: 40, content: {
                 Image(systemName: "arrow.left")
@@ -24,7 +27,7 @@ struct Sign_in: View {
                     }
                 
                 VStack(spacing: 15 , content: {
-                    Text("Sign-in")
+                    Text("Sign-up")
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     
                     Text("Enter Your Email Address and Passord and continue shoping.")
@@ -33,6 +36,15 @@ struct Sign_in: View {
                 })
                 
                 VStack(spacing: 15 , content: {
+                    TextField("UserName", text: $userName)
+                        .padding(.horizontal)
+                        .frame(height: 60 )
+                        .background(.gray.opacity(0.2))
+                        .clipShape(Capsule())
+                        .overlay{
+                            Capsule()
+                                .stroke(.gray.opacity(0.8), lineWidth: 0.5 )
+                        }
                     TextField("Email Address", text: $email)
                         .padding(.horizontal)
                         .frame(height: 60 )
@@ -70,15 +82,13 @@ struct Sign_in: View {
                     .foregroundStyle(.white)
                     
                     NavigationLink{
-                        Sign_up()
+                        Sign_in()
                     }label: {
-                        Text("Not having account? **Sign-up**")
+                        Text("Already having an Account? **Sign-in**")
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     }
                     
                     .foregroundColor(.white)
-                    
-                    
                 })
                 
             })
@@ -90,5 +100,5 @@ struct Sign_in: View {
 }
 
 #Preview {
-    Sign_in()
+    Sign_up()
 }

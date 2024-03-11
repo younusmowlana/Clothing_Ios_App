@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F12785E2B9E049C00052893 /* Sign-in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12785D2B9E049C00052893 /* Sign-in.swift */; };
+		1F1278602B9E0D3F00052893 /* Sign-up.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12785F2B9E0D3F00052893 /* Sign-up.swift */; };
 		1F6911DB2B9DAE5500660CAC /* ios_clothing_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6911DA2B9DAE5500660CAC /* ios_clothing_appApp.swift */; };
 		1F6911DD2B9DAE5500660CAC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6911DC2B9DAE5500660CAC /* ContentView.swift */; };
 		1F6911DF2B9DAE5600660CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6911DE2B9DAE5600660CAC /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		1F12785D2B9E049C00052893 /* Sign-in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign-in.swift"; sourceTree = "<group>"; };
+		1F12785F2B9E0D3F00052893 /* Sign-up.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign-up.swift"; sourceTree = "<group>"; };
 		1F6911D72B9DAE5500660CAC /* ios-clothing-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-clothing-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6911DA2B9DAE5500660CAC /* ios_clothing_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_clothing_appApp.swift; sourceTree = "<group>"; };
 		1F6911DC2B9DAE5500660CAC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				1F6911E92B9DAFB100660CAC /* Splashview.swift */,
 				1F8673FF2B9DB36C00318335 /* OnBoardingView.swift */,
 				1F12785D2B9E049C00052893 /* Sign-in.swift */,
+				1F12785F2B9E0D3F00052893 /* Sign-up.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6911EA2B9DAFB100660CAC /* Splashview.swift in Sources */,
+				1F1278602B9E0D3F00052893 /* Sign-up.swift in Sources */,
 				1F8674002B9DB36C00318335 /* OnBoardingView.swift in Sources */,
 				1F6911DD2B9DAE5500660CAC /* ContentView.swift in Sources */,
 				1F6911DB2B9DAE5500660CAC /* ios_clothing_appApp.swift in Sources */,

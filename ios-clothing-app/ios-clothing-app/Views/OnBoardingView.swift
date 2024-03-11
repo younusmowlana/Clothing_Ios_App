@@ -16,7 +16,7 @@ struct OnBoardingView: View {
     @State private var offset = CGSize.zero
     var body: some View {
         if isActive {
-            ContentView()
+            Sign_in()
         }
         else{
             ZStack(alignment: .top){

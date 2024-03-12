@@ -15,6 +15,8 @@ struct Sign_up: View {
     
     @Environment(\.presentationMode) var dismiss
     
+    @StateObject var userViewModel = UserViewModel()
+    
     var body: some View {
         NavigationStack{
             
@@ -69,12 +71,20 @@ struct Sign_up: View {
                 
                 //login button
                 VStack(spacing: 15 , content: {
-                    Button{
-                        
-                    }label: {
-                        Text("Continue")
-                            .fontWeight(.semibold )
+                    Button(action: {
+                    let user = UserModel(username: userName, email: email, password: password, isAdmin: false, id: "", createdAt: "", updatedAt: "", v: 0)
+                    userViewModel.registerUser(user: user) { result in
+                        switch result {
+                        case .success(let user):
+                            print("User registered successfully: \(user)")
+                        case .failure(let error):
+                            print("Failed to register user: \(error.localizedDescription)")
+                        }
                     }
+                }) {
+                    Text("Continue")
+                        .fontWeight(.semibold)
+                }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .frame(height: 60)
                     .background(.red)
@@ -96,6 +106,7 @@ struct Sign_up: View {
             .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         .navigationBarHidden(true)
+//        .environmentObject(userViewModel)
     }
 }
 

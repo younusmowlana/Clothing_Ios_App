@@ -11,11 +11,14 @@ struct Sign_up: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userName = ""
-    
+    @State private var alertMessage = ""
     
     @Environment(\.presentationMode) var dismiss
     
+    @State private var showAlert = false
     @StateObject var userViewModel = UserViewModel()
+    @State private var isLoading = false
+    @State private var isSigined = false
     
     var body: some View {
         NavigationStack{
@@ -69,27 +72,48 @@ struct Sign_up: View {
                 
                 Spacer()
                 
-                //login button
                 VStack(spacing: 15 , content: {
                     Button(action: {
-                    let user = UserModel(username: userName, email: email, password: password, isAdmin: false, id: "", createdAt: "", updatedAt: "", v: 0)
-                    userViewModel.registerUser(user: user) { result in
-                        switch result {
-                        case .success(let user):
-                            print("User registered successfully: \(user)")
-                        case .failure(let error):
-                            print("Failed to register user: \(error.localizedDescription)")
-                        }
+                            isLoading = true
+                            userViewModel.registerUser(username: userName, email: email, password: password) { result in
+                                switch result {
+                                case .success(let user):
+                                    UserDefaults.standard.setValue(user.id, forKey: "UID")
+                                    UserDefaults.standard.setValue(email, forKey: "Email")
+                                    UserDefaults.standard.setValue(userName, forKey: "Name")
+                                    print(user.id)
+                                    isSigined = true
+                                    alertMessage = "You have registerd successfully!"
+                                    showAlert = true
+                                case .failure(let error):
+                                    withAnimation {
+                                        isLoading.toggle()
+                                    }
+                                    print("Failed to register user: \(error.localizedDescription)")
+                                    alertMessage = "Something went wrong. Please try to register within some times"
+                                    showAlert = true
+                                }
+                            }
+                        }) {
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        Text("Continue")
+                            .fontWeight(.semibold)
                     }
-                }) {
-                    Text("Continue")
-                        .fontWeight(.semibold)
                 }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .frame(height: 60)
                     .background(.red)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
+//                    .navigationDestination(isPresented: $isSigined){
+//                        ContentView()
+//                    }
+                    NavigationLink(destination: ContentView(), isActive: $isSigined) {
+                           EmptyView()
+                       }
+
                     
                     NavigationLink{
                         Sign_in()
@@ -106,7 +130,15 @@ struct Sign_up: View {
             .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         .navigationBarHidden(true)
-//        .environmentObject(userViewModel)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Registration"),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK")) {
+                    isLoading = false
+                }
+            )
+        }
     }
 }
 

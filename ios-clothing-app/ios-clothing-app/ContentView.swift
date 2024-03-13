@@ -13,9 +13,10 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Welcome to Home page")
         }
         .padding()
+        .navigationBarHidden(true)
     }
 }
 

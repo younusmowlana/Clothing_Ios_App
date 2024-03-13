@@ -7,7 +7,7 @@
 
 import Foundation
 struct UserModel: Codable {
-    let username, email, password: String
+    let username, email, password: String?
     let isAdmin: Bool
     let id, createdAt, updatedAt: String
     let v: Int

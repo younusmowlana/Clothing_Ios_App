@@ -2,7 +2,6 @@
 //  UserViewModel.swift
 //  ios-clothing-app
 //
-//  Created by Kabir Moulana on 3/12/24.
 //
 
 import Foundation
@@ -49,8 +48,6 @@ class UserViewModel: ObservableObject {
         }
     }
 
-    
-    
 func loginUser(username: String, password: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         guard let url = URL(string: BaseUrl + "auth/login") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))

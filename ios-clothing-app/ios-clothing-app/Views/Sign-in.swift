@@ -2,8 +2,6 @@
 //  Sign-in.swift
 //  ios-clothing-app
 //
-//  Created by Kabir Moulana on 3/10/24.
-//
 
 import SwiftUI
 

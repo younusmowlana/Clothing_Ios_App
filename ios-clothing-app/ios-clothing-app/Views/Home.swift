@@ -20,15 +20,14 @@ struct Home: View {
                         
                         Spacer()
                         
-                        Image(systemName: "bell")
-                            .padding(.vertical, 25)
+                        Image(systemName: "bell")                             .padding(.vertical, 25)
                             .padding(.horizontal, 16)
                             .imageScale(.large)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(Color.white.opacity(0.05), lineWidth: 3)
                             }
-                    }
+                    } 
                     .padding()
                     
                     prodView(productModel: productModel)

@@ -36,7 +36,7 @@ struct OnBoardingView: View {
 //                    Image("nike_oboarding")
 //                        .resizable()
 //                        .scaledToFill()
-                    Text("Start journy\nwith Nike ✓™")
+                    Text("Start journy\nwith Vogue™")
                         .font(.largeTitle.bold())
                         .multilineTextAlignment(.center)
                     
@@ -78,7 +78,7 @@ struct OnBoardingView: View {
             .padding()
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity )
             .background(
-              Image("onboarding_back")
+              Image("vogue_oboarding")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()

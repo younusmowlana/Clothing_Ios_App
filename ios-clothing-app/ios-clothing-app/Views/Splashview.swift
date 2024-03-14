@@ -15,7 +15,7 @@ struct Splashview: View {
             if isActive {
                 OnBoardingView()
             }else {
-                Text("Nike")
+                Text("Vogue")
                     .font(.largeTitle.bold())
             }
         }

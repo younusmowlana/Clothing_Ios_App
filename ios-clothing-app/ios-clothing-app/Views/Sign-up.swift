@@ -118,15 +118,17 @@ struct Sign_up: View {
                         Sign_in()
                     }label: {
                         Text("Already having an Account? **Sign-in**")
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                               .frame(maxWidth: .infinity)
+                               
+                            
                     }
                     
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                 })
                 
             })
             .padding()
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {

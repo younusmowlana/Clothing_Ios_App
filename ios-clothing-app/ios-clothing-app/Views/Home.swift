@@ -10,6 +10,9 @@ import SwiftUI
 struct Home: View {
     @StateObject var productModel = ProductViewModel()
     
+    @State var product: ProductModel? = nil
+    @State var showProduct = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -27,10 +30,11 @@ struct Home: View {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(Color.white.opacity(0.05), lineWidth: 3)
                             }
-                    } 
+                    }
                     .padding()
                     
-                    prodView(productModel: productModel)
+                    prodView(productModel: productModel, product: $product, showProduct: $showProduct)
+
                 }
                 
             }
@@ -42,7 +46,7 @@ struct Home: View {
     }
 }
 
-func prodView(productModel: ProductViewModel) -> some View {
+func prodView(productModel: ProductViewModel, product: Binding<ProductModel?>, showProduct: Binding<Bool>) -> some View {
     VStack {
         Spacer()
         ForEach(productModel.products, id: \.id) { item in
@@ -69,14 +73,25 @@ func prodView(productModel: ProductViewModel) -> some View {
             .background(Color.gray.opacity(0.1))
             .clipShape(RoundedRectangle(cornerRadius: 30))
             .padding(.horizontal)
+            .onTapGesture {
+                product.wrappedValue = item
+                showProduct.wrappedValue = true
+            }
+            .background(
+                            NavigationLink(
+                                destination: ProductView(data: item),
+                                isActive: showProduct,
+                                label: EmptyView.init
+                            )
+                            .opacity(0)
+                            .buttonStyle(PlainButtonStyle())
+                        )
         }
         Spacer()
     }
     .zIndex(0)
     .padding(.horizontal)
 }
-
-
 
 
 #Preview {

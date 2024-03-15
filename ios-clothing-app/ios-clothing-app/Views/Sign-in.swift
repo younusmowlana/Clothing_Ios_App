@@ -107,14 +107,14 @@ struct Sign_in: View {
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     }
                     
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     
                     
                 })
                 
             })
             .padding()
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {

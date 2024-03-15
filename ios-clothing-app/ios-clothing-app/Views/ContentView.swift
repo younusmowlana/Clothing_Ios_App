@@ -40,8 +40,8 @@ struct ContentView: View {
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(.ultraThickMaterial, for: .tabBar)
         }
-        .tint(.white)
-        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        .tint(.black)
+//        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         .navigationBarHidden(true)
     }
 }

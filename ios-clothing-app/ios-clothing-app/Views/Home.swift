@@ -10,9 +10,6 @@ import SwiftUI
 struct Home: View {
     @StateObject var productModel = ProductViewModel()
     
-    @State var product: ProductModel? = nil
-    @State var showProduct = false
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -23,7 +20,8 @@ struct Home: View {
                         
                         Spacer()
                         
-                        Image(systemName: "bell")                             .padding(.vertical, 25)
+                        Image(systemName: "bell")
+                            .padding(.vertical, 25)
                             .padding(.horizontal, 16)
                             .imageScale(.large)
                             .overlay {
@@ -33,66 +31,57 @@ struct Home: View {
                     }
                     .padding()
                     
-                    prodView(productModel: productModel, product: $product, showProduct: $showProduct)
+                    ForEach(productModel.products, id: \.id) { item in
+                        ProductItemView(product: item)
+                    }
 
                 }
                 
             }
             .scrollIndicators(.hidden)
-        }
-        .onAppear {
-            productModel.loadDataCombine()
+            .onAppear {
+                productModel.loadDataCombine()
+            }
         }
     }
 }
 
-func prodView(productModel: ProductViewModel, product: Binding<ProductModel?>, showProduct: Binding<Bool>) -> some View {
-    VStack {
-        Spacer()
-        ForEach(productModel.products, id: \.id) { item in
-            VStack {
-                AsyncImage(url: URL(string: item.img)) { img in
-                    img.resizable()
-                        .scaledToFill()
-                        .frame(height: 300)
-                } placeholder: {
-                    ProgressView()
-                        .frame(height: 300)
-                }
-                .clipShape(Rectangle())
-                .frame(height: 300)
-                
-                Text(item.title)
-                    .font(.headline.bold())
-                    .multilineTextAlignment(.center)
-                
-                Text("$\(item.price)")
-                    .font(.callout)
+struct ProductItemView: View {
+    @State var showProduct = false
+    var product: ProductModel
+    
+    var body: some View {
+        VStack {
+            AsyncImage(url: URL(string: product.img)) { img in
+                img.resizable()
+                    .scaledToFill()
+                    .frame(height: 300)
+            } placeholder: {
+                ProgressView()
+                    .frame(height: 300)
             }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .clipShape(RoundedRectangle(cornerRadius: 30))
-            .padding(.horizontal)
-            .onTapGesture {
-                product.wrappedValue = item
-                showProduct.wrappedValue = true
-            }
-            .background(
-                            NavigationLink(
-                                destination: ProductView(data: item),
-                                isActive: showProduct,
-                                label: EmptyView.init
-                            )
-                            .opacity(0)
-                            .buttonStyle(PlainButtonStyle())
-                        )
+            .clipShape(Rectangle())
+            .frame(height: 300)
+            
+            Text(product.title)
+                .font(.headline.bold())
+                .multilineTextAlignment(.center)
+            
+            Text("$\(product.price)")
+                .font(.callout)
         }
-        Spacer()
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 30))
+        .padding(.horizontal)
+        .onTapGesture {
+            showProduct = true
+        }
+        .sheet(isPresented: $showProduct) {
+            ProductView(data: product)
+        }
     }
-    .zIndex(0)
-    .padding(.horizontal)
 }
-
 
 #Preview {
     ContentView()

@@ -83,7 +83,7 @@ struct OnBoardingView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             )
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         
     }

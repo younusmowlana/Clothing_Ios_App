@@ -17,6 +17,9 @@
 		1F1278712BA2458200052893 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1278702BA2458200052893 /* Home.swift */; };
 		1F1278732BA24DC200052893 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1278722BA24DC200052893 /* ItemModel.swift */; };
 		1F1278752BA3C51C00052893 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1278742BA3C51C00052893 /* ProductView.swift */; };
+		1F1D7E3C2BA9D4C100B343EE /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D7E3B2BA9D4C100B343EE /* CartView.swift */; };
+		1F1D7E402BA9DB9B00B343EE /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D7E3F2BA9DB9B00B343EE /* CartModel.swift */; };
+		1F1D7E422BA9E05E00B343EE /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D7E412BA9E05E00B343EE /* CartViewModel.swift */; };
 		1F6911DB2B9DAE5500660CAC /* ios_clothing_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6911DA2B9DAE5500660CAC /* ios_clothing_appApp.swift */; };
 		1F6911DD2B9DAE5500660CAC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6911DC2B9DAE5500660CAC /* ContentView.swift */; };
 		1F6911DF2B9DAE5600660CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6911DE2B9DAE5600660CAC /* Assets.xcassets */; };
@@ -36,6 +39,9 @@
 		1F1278702BA2458200052893 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		1F1278722BA24DC200052893 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		1F1278742BA3C51C00052893 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		1F1D7E3B2BA9D4C100B343EE /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		1F1D7E3F2BA9DB9B00B343EE /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		1F1D7E412BA9E05E00B343EE /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		1F6911D72B9DAE5500660CAC /* ios-clothing-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-clothing-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6911DA2B9DAE5500660CAC /* ios_clothing_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_clothing_appApp.swift; sourceTree = "<group>"; };
 		1F6911DC2B9DAE5500660CAC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +68,7 @@
 				1F1278622B9FD57300052893 /* UserModel.swift */,
 				1F12786A2BA20F2D00052893 /* ProductModel.swift */,
 				1F1278722BA24DC200052893 /* ItemModel.swift */,
+				1F1D7E3F2BA9DB9B00B343EE /* CartModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -71,6 +78,7 @@
 			children = (
 				1F1278652B9FD80500052893 /* UserViewModel.swift */,
 				1F12786C2BA213F700052893 /* ProductViewModel.swift */,
+				1F1D7E412BA9E05E00B343EE /* CartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 				1F12785F2B9E0D3F00052893 /* Sign-up.swift */,
 				1F1278702BA2458200052893 /* Home.swift */,
 				1F1278742BA3C51C00052893 /* ProductView.swift */,
+				1F1D7E3B2BA9D4C100B343EE /* CartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,10 +214,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F1D7E3C2BA9D4C100B343EE /* CartView.swift in Sources */,
 				1F12786B2BA20F2D00052893 /* ProductModel.swift in Sources */,
 				1F6911EA2B9DAFB100660CAC /* Splashview.swift in Sources */,
 				1F1278732BA24DC200052893 /* ItemModel.swift in Sources */,
+				1F1D7E402BA9DB9B00B343EE /* CartModel.swift in Sources */,
 				1F1278662B9FD80500052893 /* UserViewModel.swift in Sources */,
+				1F1D7E422BA9E05E00B343EE /* CartViewModel.swift in Sources */,
 				1F1278752BA3C51C00052893 /* ProductView.swift in Sources */,
 				1F1278632B9FD57300052893 /* UserModel.swift in Sources */,
 				1F1278602B9E0D3F00052893 /* Sign-up.swift in Sources */,

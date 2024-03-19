@@ -119,7 +119,7 @@ struct Sign_in: View {
         .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Registration"),
+                title: Text("Sign in"),
                 message: Text(alertMessage),
                 dismissButton: .default(Text("OK")) {
                     isLoading = false

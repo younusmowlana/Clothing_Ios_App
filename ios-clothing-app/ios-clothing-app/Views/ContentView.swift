@@ -18,14 +18,14 @@ struct ContentView: View {
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(.ultraThickMaterial, for: .tabBar)
             
-            Text("Search View")
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Explore")
-                }
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(.ultraThickMaterial, for: .tabBar)
-            Text("Cart View")
+//            Text("Search View")
+//                .tabItem {
+//                    Image(systemName: "magnifyingglass")
+//                    Text("Explore")
+//                }
+//                .toolbarBackground(.visible, for: .tabBar)
+//                .toolbarBackground(.ultraThickMaterial, for: .tabBar)
+            CartView()
                 .tabItem {
                     Image(systemName: "bag")
                     Text("Cart")

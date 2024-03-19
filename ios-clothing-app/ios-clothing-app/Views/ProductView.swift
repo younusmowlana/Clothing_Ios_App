@@ -1,9 +1,3 @@
-//
-//  ProductView.swift
-//  ios-clothing-app
-//
-//  Created by Kabir Moulana on 3/15/24.
-//
 
 import SwiftUI
 
@@ -12,7 +6,10 @@ struct ProductView: View {
     
     @State var selectedSize = "XL"
     
+    @StateObject var cartViewModel = CartViewModel()
+    
     @Environment(\.presentationMode) var dismiss
+    
     
     var body: some View {
         NavigationStack{
@@ -95,15 +92,32 @@ struct ProductView: View {
                 VStack(alignment:.leading ){
                     Text("$\(data.price)")
                         .font(.title2.bold())
+                    
                 }
                 .frame(width: UIScreen.main.bounds.width / 2.5, height: 60 )
                 .background(.gray.opacity(0.06))
                 .clipShape(.rect(cornerRadius: 25))
                 
-                //Add to Cart
-                Button("Add to Cart"){
-                    
+                
+                
+                
+                // Add to Cart
+                Button("Add to Cart") {
+                    if let userID = UserDefaults.standard.string(forKey: "UID") {
+                        cartViewModel.createCart(userID: userID, productID: data.id, size: selectedSize) { result in
+                            switch result {
+                            case .success(let cartModel):
+                                print("Cart created successfully: \(cartModel)")
+                            case .failure(let error):
+                                print("Failed to create cart: \(error)")
+                            }
+                        }
+                    } else {
+                        print("Failed to retrieve userID from UserDefaults")
+                    }
                 }
+
+
                 .frame(maxWidth:.infinity)
                 .frame(height: 60)
                 .background(.black)
@@ -121,10 +135,6 @@ struct ProductView: View {
        
     
 }
-
-//#Preview {
-//    ProductView()
-//}
 
 extension View{
     func safeArea() -> UIEdgeInsets{

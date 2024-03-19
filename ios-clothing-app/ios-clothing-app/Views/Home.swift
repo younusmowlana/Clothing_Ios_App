@@ -12,39 +12,51 @@ struct Home: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+            VStack(spacing: 0) {
+                ZStack {
+                    Color.white
+                        .edgesIgnoringSafeArea(.top)
+                        .frame(height: 60)
+                    
                     HStack {
-                        Text("**Gentleman's**\nGallery")
-                            .font(.largeTitle)
+                        Text("**VOGUE's** Exclusive Gallery")
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                            .padding()
                         
                         Spacer()
                         
                         Image(systemName: "bell")
-                            .padding(.vertical, 25)
-                            .padding(.horizontal, 16)
+                            .padding(.vertical, 15)
+                            .padding(.horizontal, 12)
                             .imageScale(.large)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.white.opacity(0.05), lineWidth: 3)
+                                    .stroke(Color.black.opacity(0.1), lineWidth: 3)
                             }
+                            .padding(.trailing, 20)
                     }
-                    .padding()
-                    
-                    ForEach(productModel.products, id: \.id) { item in
-                        ProductItemView(product: item)
-                    }
-
                 }
                 
-            }
-            .scrollIndicators(.hidden)
-            .onAppear {
-                productModel.loadDataCombine()
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(productModel.products, id: \.id) { item in
+                            ProductItemView(product: item)
+                        }
+                    }
+                    .padding(.top, 10) // Reduced top padding
+                }
+                .scrollIndicators(.hidden)
+                .onAppear {
+                    productModel.loadDataCombine()
+                }
             }
         }
     }
 }
+
+
 
 struct ProductItemView: View {
     @State var showProduct = false
@@ -57,8 +69,11 @@ struct ProductItemView: View {
                     .scaledToFill()
                     .frame(height: 300)
             } placeholder: {
-                ProgressView()
-                    .frame(height: 300)
+                ZStack {
+                    Color.gray.opacity(0.1)
+                    ProgressView()
+                }
+                .frame(height: 300)
             }
             .clipShape(Rectangle())
             .frame(height: 300)

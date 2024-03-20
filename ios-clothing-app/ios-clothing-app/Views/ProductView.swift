@@ -59,7 +59,7 @@ struct ProductView: View {
                                     Text("\(item)")
                                         .font(.headline)
                                         .frame(width: 70, height: 70)
-                                        .background(selectedSize == item ? .black: .gray.opacity(0.06))
+                                        .background(selectedSize == item ? .red: .gray.opacity(0.06))
                                         .foregroundStyle(selectedSize == item ? .white : .black)
                                         .clipShape(RoundedRectangle(cornerRadius: 30))
                                     
@@ -104,6 +104,7 @@ struct ProductView: View {
                 // Add to Cart
                 Button("Add to Cart") {
                     if let userID = UserDefaults.standard.string(forKey: "UID") {
+                        print(userID)
                         cartViewModel.createCart(userID: userID, productID: data.id, size: selectedSize) { result in
                             switch result {
                             case .success(let cartModel):
@@ -120,7 +121,7 @@ struct ProductView: View {
 
                 .frame(maxWidth:.infinity)
                 .frame(height: 60)
-                .background(.black)
+                .background(.red)
                 .clipShape(.rect(cornerRadius: 25))
                 .foregroundStyle(.white)
                 .fontWeight(.semibold)

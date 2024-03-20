@@ -12,7 +12,7 @@ const CartSchema = new mongoose.Schema(
                 type:Number,
                 default:1,
             },
-            title: { type: String, required: false,},
+            title: { type: String, required: false },
             desc: { type: String, required: false, },
             img: { type: String, required: false },
             categories: { type: Array },

@@ -10,7 +10,7 @@ struct ProductView: View {
     
     @Environment(\.presentationMode) var dismiss
     
-    
+        
     var body: some View {
         NavigationStack{
             ScrollView{

@@ -1,13 +1,19 @@
 import Foundation
+import SwiftUI
+import Combine
 
 class CartViewModel: ObservableObject {
     
-    @Published var products : [Product] = []
+    var compose = Set<AnyCancellable>()
     
-//    
-//    init(){
-//        getCartData()
-//    }
+    @Published var products: [CartModel] = []
+
+    
+    
+
+    init(){
+        getCartData()
+    }
     
     func createCart(userID: String, productID: String, size: String, completion: @escaping (Result<CartModel, Error>) -> Void) {
         guard let url = URL(string: BaseUrl + "cart/") else {
@@ -17,12 +23,8 @@ class CartViewModel: ObservableObject {
         
         let cartData: [String: Any] = [
             "userId": userID,
-            "products": [
-                [
-                    "productId": productID,
-                    "size": size
-                ]
-            ]
+            "productId": productID,
+            "size": size
         ]
         
         print("cartData->",cartData)
@@ -53,40 +55,44 @@ class CartViewModel: ObservableObject {
         task.resume()
     }
     
-    func getCartData(completion: @escaping (Result<CartModel, Error>) -> Void) {
-        guard let uid = UserDefaults.standard.string(forKey: "UID") else {
-            completion(.failure(NSError(domain: "No UID found in UserDefaults", code: 0, userInfo: nil)))
-            return
+
+    func getCartData() {
+        if let userID = UserDefaults.standard.string(forKey: "UID") {
+            print("Younus->",userID)
+            let urlString = BaseUrl + "cart/find/\(userID)"
+            
+            
+            guard let url = URL(string: urlString) else { return }
+            
+            var request = URLRequest(url: url)
+            
+            print("request->",request)
+            
+            let session = URLSession(configuration: .default)
+            
+            print("1")
+            
+            session.dataTaskPublisher(for: request)
+                .map(\.data)
+                .retry(3)
+                .decode(type: [CartModel].self, decoder: JSONDecoder())
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                        
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                }, receiveValue: { products in
+                    self.products = products
+                })
+                .store(in: &compose)
         }
-
-        let urlString = BaseUrl + "cart/find/\(uid)"
-        guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-            return
+        else{
+            print("Failed to retrieve userID from UserDefaults")
         }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-
-            guard let data = data else {
-                completion(.failure(NSError(domain: "No data", code: 0, userInfo: nil)))
-                return
-            }
-
-            do {
-                
-                let decoder = JSONDecoder()
-                let cart = try decoder.decode(CartModel.self, from: data)
-                self.products = cart.products
-
-                completion(.success(cart))
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
     }
 
 

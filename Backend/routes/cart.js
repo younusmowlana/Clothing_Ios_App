@@ -10,41 +10,37 @@ const router = require("express").Router();
 
 
 router.post("/", async (req, res) => {
-  const { userId, products } = req.body;
+  const { userId, productId, size } = req.body;
 
   try {
-    const updatedProducts = await Promise.all(
-      products.map(async (product) => {
-        const { productId } = product;
-        const fetchedProduct = await Product.findOne({ _id: productId });
-        if (!fetchedProduct) {
-          throw new Error(`Product with ID ${productId} not found`);
-        }
+    const fetchedProduct = await Product.findOne({ _id: productId });
 
-        // Fill in missing fields
-        return {
-          productId: fetchedProduct._id,
-          quantity: product.quantity || 1, // Use the provided quantity or default to 1
-          title: fetchedProduct.title,
-          desc: fetchedProduct.desc,
-          img: fetchedProduct.img,
-          categories: fetchedProduct.categories,
-          size:  products[0].size,
-          color: fetchedProduct.color,
-          price: fetchedProduct.price,
-          inStock: fetchedProduct.inStock,
-        };
-      })
-    );
+    if (!fetchedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
-    const newCart = new Cart({ userId, products: updatedProducts });
+    const newCart = new Cart({
+      userId,
+      productId: fetchedProduct._id,
+      quantity: 1,
+      title: fetchedProduct.title,
+      desc: fetchedProduct.desc,
+      img: fetchedProduct.img,
+      categories: fetchedProduct.categories,
+      size,
+      color: fetchedProduct.color,
+      price: fetchedProduct.price,
+      inStock: fetchedProduct.inStock,
+    });
 
     const savedCart = await newCart.save();
     res.status(200).json(savedCart);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 
 
@@ -78,11 +74,13 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 router.get("/find/:userId", async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
-    res.status(200).json(cart);
+    const cartArray = cart ? [cart] : [];
+    res.status(200).json(cartArray);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 // //GET ALL
 

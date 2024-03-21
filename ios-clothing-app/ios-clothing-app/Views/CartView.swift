@@ -8,18 +8,17 @@ import SwiftUI
 
 struct CartView: View {
     @State var totalAmount: Int = 0
-    var cart: CartModel = sampleData[0]
+    
     
     @StateObject var cartView : CartViewModel = CartViewModel()
 
     var body: some View {
         VStack {
             List {
-                ForEach(cartView.products.indices, id: \.self) { index in
-                    cartCard(product: cartView.products[index])
+                ForEach(cartView.products, id: \.id) { item in
+                    cartCard(product: item)
                 }
             }
-//            .padding()
             
             HStack {
                 VStack(alignment: .leading) {
@@ -41,21 +40,17 @@ struct CartView: View {
                 .padding()
             }
         }
-        .onAppear {
-            cartView.getCartData { result in
-            switch result {
-            case .success(let cartModel):
-                
-                totalAmount = cartModel.products.reduce(0) { $0 + $1.price }
-            case .failure(let error):
-                
-                print("Error fetching cart data: \(error)")
+//        .onAppear {
+//                    cartView.getCartData ()
+//                }
             }
-        }
-    }
+
     }
 
-    @ViewBuilder func cartCard(product: Product) -> some View {
+struct cartCard: View {
+    var product: CartModel
+    
+    var body: some View {
         HStack {
             AsyncImage(url: URL(string: product.img)) { image in
                 image.resizable()
@@ -111,8 +106,8 @@ struct CartView: View {
         .cornerRadius(20)
         .shadow(color: Color.black.opacity(0.2), radius: 6)
     }
+    }
 
-}
 
 
 

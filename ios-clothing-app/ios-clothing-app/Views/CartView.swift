@@ -34,7 +34,7 @@ struct CartView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 60)
-                .background(.red)
+                .background(.black)
                 .foregroundColor(.white)
                 .font(.headline)
                 .cornerRadius(25)

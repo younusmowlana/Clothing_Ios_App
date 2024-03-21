@@ -96,6 +96,8 @@ struct Sign_up: View {
                         }) {
                     if isLoading {
                         ProgressView()
+                            .foregroundColor(.white)
+
                     } else {
                         Text("Continue")
                             .fontWeight(.semibold)
@@ -103,7 +105,7 @@ struct Sign_up: View {
                 }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .frame(height: 60)
-                    .background(.red)
+                    .background(.black)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
 //                    .navigationDestination(isPresented: $isSigined){

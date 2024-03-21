@@ -23,7 +23,7 @@ struct OnBoardingView: View {
                     Spacer()
                     Circle()
                         .fill(
-                            RadialGradient(colors: [.red, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
+                            RadialGradient(colors: [.black, .clear, .clear, .clear], center: .center, startRadius: 0, endRadius: UIScreen.main.bounds.width)
                         )
                         .scaleEffect(isExpanded ? 20 : 2)
                         .padding(.bottom,-(UIScreen.main.bounds.width / 2))
@@ -39,10 +39,12 @@ struct OnBoardingView: View {
                     Text("Start journy\nwith Vogue™")
                         .font(.largeTitle.bold())
                         .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
                     
                     Text("Smart gorgeous and fashionable collection make you cool.")
                         .multilineTextAlignment(.center)
                         .opacity(0.6)
+                        .foregroundColor(.white)
                     
                     
                     VStack{

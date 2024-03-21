@@ -93,7 +93,7 @@ struct Sign_in: View {
                 }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .frame(height: 60)
-                    .background(.red)
+                    .background(.black)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
                     NavigationLink(destination: ContentView(), isActive: $isLoggedIn) {
@@ -114,7 +114,6 @@ struct Sign_in: View {
                 
             })
             .padding()
-//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
         .navigationBarHidden(true)
         .alert(isPresented: $showAlert) {

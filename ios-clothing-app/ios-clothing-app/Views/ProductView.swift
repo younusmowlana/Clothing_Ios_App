@@ -37,7 +37,7 @@ struct ProductView: View {
                                 }
                             Spacer()
                             
-                            Image(systemName: "heart")
+//                            Image(systemName: "heart")
                         }
                         .padding(.top, safeArea().top)
                         .padding(.horizontal,30)

@@ -10,8 +10,10 @@ import SwiftUI
 struct Home: View {
     @StateObject var productModel = ProductViewModel()
     
+    @State var searchTerm = ""
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
                     Color.white
@@ -39,13 +41,30 @@ struct Home: View {
                     }
                 }
                 
+                ZStack {
+                    TextField("Search cloths", text: $searchTerm)
+                        .padding(.horizontal)
+                        .frame(height: 60 )
+                        .background(.gray.opacity(0.2))
+                        .clipShape(Capsule())
+                        .overlay{
+                            Capsule()
+                                .stroke(.white.opacity(0.8), lineWidth: 0.5 )
+                        }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+
+                
+                
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        ForEach(productModel.products, id: \.id) { item in
+                        ForEach(filteredProducts, id: \.id) { item in
                             ProductItemView(product: item)
                         }
                     }
-                    .padding(.top, 10) // Reduced top padding
+                    .padding(.top, 10)
                 }
                 .scrollIndicators(.hidden)
                 .onAppear {
@@ -54,16 +73,25 @@ struct Home: View {
             }
         }
     }
+    
+    var filteredProducts: [ProductModel] {
+        if searchTerm.isEmpty {
+            return productModel.products
+        } else {
+            return productModel.products.filter { $0.title.localizedCaseInsensitiveContains(searchTerm) }
+        }
+    }
 }
-
 
 
 struct ProductItemView: View {
     @State var showProduct = false
     var product: ProductModel
     
+
     var body: some View {
         VStack {
+
             AsyncImage(url: URL(string: product.img)) { img in
                 img.resizable()
                     .scaledToFill()
@@ -85,6 +113,7 @@ struct ProductItemView: View {
             Text("$\(product.price)")
                 .font(.callout)
         }
+            
         .padding()
         .background(Color.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 30))

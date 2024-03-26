@@ -10,6 +10,8 @@ struct ProductView: View {
     
     @Environment(\.presentationMode) var dismiss
     
+    @State var showAlert = false
+    
         
     var body: some View {
         NavigationStack{
@@ -105,14 +107,7 @@ struct ProductView: View {
                 Button("Add to Cart") {
                     if let userID = UserDefaults.standard.string(forKey: "UID") {
                         print(userID)
-                        cartViewModel.createCart(userID: userID, productID: data.id, size: selectedSize) { result in
-                            switch result {
-                            case .success(let cartModel):
-                                print("Cart created successfully: \(cartModel)")
-                            case .failure(let error):
-                                print("Failed to create cart: \(error)")
-                            }
-                        }
+                        cartViewModel.createCart(userID: userID, productID: data.id, size: selectedSize)
                     } else {
                         print("Failed to retrieve userID from UserDefaults")
                     }

@@ -20,6 +20,7 @@ class ProductViewModel : ObservableObject{
         
         let session = URLSession(configuration: .default)
         
+        print("product fetch")
         session.dataTaskPublisher(for: request)
             .map(\.data)
             .retry(3)

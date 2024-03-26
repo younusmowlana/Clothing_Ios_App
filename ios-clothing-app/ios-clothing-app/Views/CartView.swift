@@ -7,45 +7,52 @@
 import SwiftUI
 
 struct CartView: View {
-    @State var totalAmount: Int = 0
     
-    
-    @StateObject var cartView : CartViewModel = CartViewModel()
+    @StateObject var cartView: CartViewModel = CartViewModel()
+    @State private var isLoading = true
+
+    var totalAmount: Int {
+        cartView.products.reduce(0) { $0 + $1.price * $1.quantity }
+    }
 
     var body: some View {
         VStack {
-            List {
-                ForEach(cartView.products, id: \.id) { item in
-                    cartCard(product: item)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    ForEach(cartView.products, id: \.id) { item in
+                        cartCard(product: item)
+                    }
                 }
+                .padding(.top, 10) // Reduced top padding
             }
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Total Amount: $\(totalAmount)")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-                }
+            .scrollIndicators(.hidden)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Total Amount: $\(totalAmount)")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding()
+                    }
 
-                Button("Purchase") {
-                    // Handle purchase action
+                    Button("Purchase") {
+                        // Handle purchase action
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(.black)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(25)
+                    .padding()
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 60)
-                .background(.black)
-                .foregroundColor(.white)
-                .font(.headline)
-                .cornerRadius(25)
-                .padding()
             }
+        
+        .onAppear {
+            cartView.getCartData()
         }
-//        .onAppear {
-//                    cartView.getCartData ()
-//                }
-            }
-
     }
+}
+
 
 struct cartCard: View {
     var product: CartModel

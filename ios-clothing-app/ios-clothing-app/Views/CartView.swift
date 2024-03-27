@@ -20,11 +20,10 @@ struct CartView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     ForEach(cartView.products, id: \.id) { item in
-                        cartCard(product: item)
+                    CartCard(product: item, cartView: cartView)
                     }
                 }
-                .padding(.top, 10) // Reduced top padding
-            }
+                .padding(.top, 10)             }
             .scrollIndicators(.hidden)
                 HStack {
                     VStack(alignment: .leading) {
@@ -54,9 +53,12 @@ struct CartView: View {
 }
 
 
-struct cartCard: View {
+struct CartCard: View {
     var product: CartModel
-    
+    @ObservedObject var cartView: CartViewModel
+
+    @State private var isDeleted = false
+
     var body: some View {
         HStack {
             AsyncImage(url: URL(string: product.img)) { image in
@@ -83,9 +85,8 @@ struct cartCard: View {
                     .bold()
                     .frame(maxWidth:.infinity,alignment: .leading)
                 HStack {
-                    
                     Button(action: {
-                        
+                        // Handle decrease quantity
                     }) {
                         Image(systemName: "minus.circle")
                             .font(.title2)
@@ -93,29 +94,38 @@ struct cartCard: View {
 
                     Text("\(product.quantity)")
                         .font(.title2)
-                    
 
                     Button(action: {
-                        
+                        // Handle increase quantity
                     }) {
                         Image(systemName: "plus.circle")
                             .font(.title2)
                     }
+                    
+                    Button(action: {
+                        withAnimation {
+                            isDeleted = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            cartView.deleteCart(id: product.id)
+                        }
+                    }) {
+                        Image(systemName: "trash")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                    }
+                    .animation(.default, value: isDeleted)
                 }
                 .padding(.top, 4)
             }
             
             Spacer()
-            
-            
         }
         .padding(16)
         .cornerRadius(20)
         .shadow(color: Color.black.opacity(0.2), radius: 6)
     }
-    }
-
-
+}
 
 
 #Preview {

@@ -25,7 +25,7 @@ struct ContentView: View {
                 }
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(.ultraThickMaterial, for: .tabBar)
-            Text("Profile View")
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profile")

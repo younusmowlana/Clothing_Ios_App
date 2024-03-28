@@ -6,8 +6,21 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class UserViewModel: ObservableObject {
+    
+    var compose = Set<AnyCancellable>()
+    
+    @Published var userDetails: [UserModel] = []
+
+    @State private var isLoading = true
+        
+
+    init(){
+        getUserData()
+    }
+    
     func registerUser(username: String,email: String, password: String,  completion: @escaping (Result<UserModel, Error>) -> Void) {
         guard let url = URL(string: BaseUrl + "auth/register") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
@@ -84,6 +97,49 @@ func loginUser(username: String, password: String, completion: @escaping (Result
             task.resume()
         } catch {
             completion(.failure(error))
+        }
+    }
+    
+    
+    //GET USER DETAILS
+    func getUserData() {
+        if let userID = UserDefaults.standard.string(forKey: "UID") {
+            let urlString = BaseUrl + "user/find/\(userID)"
+            
+            guard let url = URL(string: urlString) else { return }
+            
+            var request = URLRequest(url: url)
+            print("request->",request)
+            let session = URLSession(configuration: .default)
+            
+            session.dataTaskPublisher(for: request)
+                .map(\.data)
+                .retry(3)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                }, receiveValue: { data in
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("Data Recived \(json)")
+                        self.isLoading = false
+                        
+                        let decodedData = try JSONDecoder().decode([UserModel].self, from: data)
+                        DispatchQueue.main.async {
+                            self.userDetails = decodedData
+                        }
+                    } catch {
+                        print("Error decoding data: \(error)")
+                        self.isLoading = false
+                    }
+                })
+                .store(in: &compose)
+        } else {
+            print("Failed to retrieve userID from UserDefaults")
         }
     }
 

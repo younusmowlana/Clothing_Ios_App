@@ -40,13 +40,13 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //Get user by id (read)
-router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
   //only admin get any user by id
   try {
     const user = await User.findById(req.params.id);
 
     const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    res.status(200).json([others]);
   } catch (err) {
     return res.status(500).json(err);
   }

@@ -11,6 +11,8 @@ struct Home: View {
     @StateObject var productModel = ProductViewModel()
     
     @State var searchTerm = ""
+    
+    @State var currentCategory = "All"
 
     var body: some View {
         NavigationStack {
@@ -56,7 +58,8 @@ struct Home: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
 
-                
+                catergoriesView
+                    .zIndex(1)
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
@@ -75,15 +78,56 @@ struct Home: View {
     }
     
     var filteredProducts: [ProductModel] {
+        let searchedProducts: [ProductModel]
         if searchTerm.isEmpty {
-            return productModel.products
+            searchedProducts = productModel.products
         } else {
-            return productModel.products.filter { $0.title.localizedCaseInsensitiveContains(searchTerm) }
+            searchedProducts = productModel.products.filter { $0.title.localizedCaseInsensitiveContains(searchTerm) }
+        }
+        
+        if currentCategory == "All" {
+            return searchedProducts
+        } else {
+            return searchedProducts.filter {
+                
+                $0.categories.contains(currentCategory)
+            }
         }
     }
+
+
+    
+    var catergoriesView : some View {
+        ScrollView(.horizontal){
+            HStack(spacing:15,content: {
+                Spacer()
+                ForEach(sampleCategory, id: \.id) {item in
+                    HStack{
+                        if !item.title.isEmpty{
+                            Text(item.title)
+                                .scaledToFit()
+                        }
+ 
+                    }
+                    .foregroundStyle(currentCategory == item.title ? .white : .black)
+                    .padding()
+                    .background(currentCategory == item.title ? .black : .gray.opacity(0.08))
+                    .clipShape(Capsule())
+                    .onTapGesture {
+                        withAnimation{
+                            currentCategory = item.title
+                        }
+                        
+                    }
+                }
+            })
+        }
+        .scrollIndicators(.hidden)
+    }
+    
 }
 
-
+ 
 struct ProductItemView: View {
     @State var showProduct = false
     var product: ProductModel
@@ -126,6 +170,8 @@ struct ProductItemView: View {
         }
     }
 }
+
+
 
 #Preview {
     ContentView()

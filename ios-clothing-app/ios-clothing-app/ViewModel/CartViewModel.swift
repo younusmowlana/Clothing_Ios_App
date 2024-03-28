@@ -15,6 +15,20 @@ class CartViewModel: ObservableObject {
         getCartData()
     }
     
+    // increase the quantity
+    func increaseQuantity(of productId: String) {
+            guard let index = products.firstIndex(where: { $0.id == productId }) else { return }
+            products[index].quantity += 1
+        }
+
+    // decrease the quantity
+    func decreaseQuantity(of productId: String) {
+            guard let index = products.firstIndex(where: { $0.id == productId }),
+                  products[index].quantity > 1 else { return }
+            products[index].quantity -= 1
+        }
+    
+    
     // ADD TO CART
     func createCart(userID: String, productID: String, size: String) {
         let urlString = BaseUrl + "cart/"

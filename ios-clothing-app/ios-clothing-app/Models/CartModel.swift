@@ -7,7 +7,7 @@ struct CartModel: Codable {
     let categories: [String]
     let size: String
     let color: [String]
-    let price, quantity: Int
+    var price, quantity: Int
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"

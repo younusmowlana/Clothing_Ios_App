@@ -25,8 +25,8 @@
 		1F6911DF2B9DAE5600660CAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6911DE2B9DAE5600660CAC /* Assets.xcassets */; };
 		1F6911E22B9DAE5600660CAC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6911E12B9DAE5600660CAC /* Preview Assets.xcassets */; };
 		1F6911EA2B9DAFB100660CAC /* Splashview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6911E92B9DAFB100660CAC /* Splashview.swift */; };
-		1F7894832BB3154A00AF7695 /* CartCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7894822BB3154A00AF7695 /* CartCalculator.swift */; };
 		1F7894852BB4776C00AF7695 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7894842BB4776C00AF7695 /* ProfileView.swift */; };
+		1F7894872BB5DC3300AF7695 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7894862BB5DC3300AF7695 /* CategoryModel.swift */; };
 		1F8674002B9DB36C00318335 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8673FF2B9DB36C00318335 /* OnBoardingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +50,8 @@
 		1F6911DE2B9DAE5600660CAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F6911E12B9DAE5600660CAC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F6911E92B9DAFB100660CAC /* Splashview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splashview.swift; sourceTree = "<group>"; };
-		1F7894822BB3154A00AF7695 /* CartCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCalculator.swift; sourceTree = "<group>"; };
 		1F7894842BB4776C00AF7695 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1F7894862BB5DC3300AF7695 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		1F8673FF2B9DB36C00318335 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +73,7 @@
 				1F12786A2BA20F2D00052893 /* ProductModel.swift */,
 				1F1278722BA24DC200052893 /* ItemModel.swift */,
 				1F1D7E3F2BA9DB9B00B343EE /* CartModel.swift */,
+				1F7894862BB5DC3300AF7695 /* CategoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -83,7 +84,6 @@
 				1F1278652B9FD80500052893 /* UserViewModel.swift */,
 				1F12786C2BA213F700052893 /* ProductViewModel.swift */,
 				1F1D7E412BA9E05E00B343EE /* CartViewModel.swift */,
-				1F7894822BB3154A00AF7695 /* CartCalculator.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -236,9 +236,9 @@
 				1F6911DB2B9DAE5500660CAC /* ios_clothing_appApp.swift in Sources */,
 				1F12785E2B9E049C00052893 /* Sign-in.swift in Sources */,
 				1F1278712BA2458200052893 /* Home.swift in Sources */,
+				1F7894872BB5DC3300AF7695 /* CategoryModel.swift in Sources */,
 				1F7894852BB4776C00AF7695 /* ProfileView.swift in Sources */,
 				1F1278692B9FD9AF00052893 /* Constants.swift in Sources */,
-				1F7894832BB3154A00AF7695 /* CartCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

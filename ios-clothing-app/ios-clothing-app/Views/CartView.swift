@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct CartView: View {
     
     @StateObject var cartView: CartViewModel = CartViewModel()
@@ -20,38 +22,37 @@ struct CartView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     ForEach(cartView.products, id: \.id) { item in
-                    CartCard(product: item, cartView: cartView)
+                        CartCard(product: item, cartView: cartView)
                     }
                 }
-                .padding(.top, 10)             }
-            .scrollIndicators(.hidden)
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Total Amount: $\(totalAmount)")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .padding()
-                    }
-
-                    Button("Purchase") {
-                        // Handle purchase action
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(.black)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .cornerRadius(25)
-                    .padding()
-                }
+                .padding(.top, 10)
             }
-        
+            .scrollIndicators(.hidden)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Total Amount: $\(totalAmount)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                }
+
+                Button("Purchase") {
+                    // Handle purchase action
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 60)
+                .background(Color.black)
+                .foregroundColor(.white)
+                .font(.headline)
+                .cornerRadius(25)
+                .padding()
+            }
+        }
         .onAppear {
             cartView.getCartData()
         }
     }
 }
-
 
 struct CartCard: View {
     var product: CartModel
@@ -79,14 +80,14 @@ struct CartCard: View {
                     .bold()
                 Text("Price: $\(product.price)")
                     .bold()
-                    .frame(maxWidth:.infinity,alignment: .leading)
-                
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 Text("Size: \(product.size)")
                     .bold()
-                    .frame(maxWidth:.infinity,alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 HStack {
                     Button(action: {
-                        // Handle decrease quantity
+                        cartView.decreaseQuantity(of: product.id)
                     }) {
                         Image(systemName: "minus.circle")
                             .font(.title2)
@@ -96,12 +97,12 @@ struct CartCard: View {
                         .font(.title2)
 
                     Button(action: {
-                        // Handle increase quantity
+                        cartView.increaseQuantity(of: product.id)
                     }) {
                         Image(systemName: "plus.circle")
                             .font(.title2)
                     }
-                    
+
                     Button(action: {
                         withAnimation {
                             isDeleted = true
@@ -118,7 +119,7 @@ struct CartCard: View {
                 }
                 .padding(.top, 4)
             }
-            
+
             Spacer()
         }
         .padding(16)

@@ -23,10 +23,15 @@ struct ProfileView: View {
         NavigationStack{
             VStack (alignment: .leading,spacing: 40, content: {
                 VStack(spacing: 15 , content: {
-                        Text("Update Your Profile")
-                            .font(.title)
+                    let name = UserDefaults.standard.string(forKey: "Name")
+                                        Text("**VOGUE's** Pvt Ltd.")
+                                            .font(.title)
+                                            .foregroundColor(.black)
+                                            .multilineTextAlignment(.center)
+                                            .padding()
+                                            
                     
-                    Text("Update Your profile Email Address and Username and continue shoping.")
+                    Text("Hello \(name ?? "") Your Profile Information")
                         .font(.callout )
                     
                 })
@@ -56,25 +61,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                VStack(spacing: 15 , content: {
-                    Button(action: {
-                        
-                    }) {
-                        if isLoading {
-                            ProgressView()
-                                .foregroundColor(.white)
-                        } else {
-                            Text("Update")
-                                .fontWeight(.semibold)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(.black)
-                    .clipShape(Capsule())
-                    .foregroundStyle(.white)
-                }
-                )
+                
                 
             })
             .padding()

@@ -18,17 +18,11 @@ struct ProductView: View {
             ScrollView{
                 VStack{
                     ZStack(alignment: .top){
-                        AsyncImage(url: URL(string: data.img)) { img in
-                            img.resizable()
-                                .scaledToFill()
-                                .frame(height: 400)
-                                .clipShape(RoundedRectangle(cornerRadius: 50))
-                                .padding(10 )
-                        } placeholder: {
-                            ProgressView()
-                                .frame(height: 300)
-                        }
-                        
+                        ImageSlider(images: data.img)
+                            .frame(height: 400)
+                            .clipShape(RoundedRectangle(cornerRadius: 50))
+                            .padding(10 )
+                   
                         //Navigation
                         HStack{
                             Image(systemName: "arrow.left")

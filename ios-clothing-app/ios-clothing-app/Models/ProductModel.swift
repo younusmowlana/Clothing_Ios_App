@@ -7,7 +7,7 @@
 import Foundation
 struct ProductModel: Codable {
     let id, title, desc: String
-    let img: String
+    let img: [String]
     let categories, size, color: [String]
     let price: Int
     let inStock: Bool

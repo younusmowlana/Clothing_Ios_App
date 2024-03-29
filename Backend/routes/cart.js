@@ -76,7 +76,7 @@ router.get("/find/:userId", async (req, res) => {
         "productId": product._id,
         "title": product.title,
         "desc": product.desc,
-        "img": product.img,
+        "img": product.img[0],
         "categories": product.categories,
         "size": cart.size,
         "color": product.color,

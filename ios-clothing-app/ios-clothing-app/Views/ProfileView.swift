@@ -47,6 +47,8 @@ struct ProfileView: View {
                                 Capsule()
                                     .stroke(.gray.opacity(0.8), lineWidth: 0.5 )
                             }
+                            .disabled(true)
+
                         TextField("Email Address", text: $email)
                             .padding(.horizontal)
                             .frame(height: 60 )
@@ -56,6 +58,8 @@ struct ProfileView: View {
                                 Capsule()
                                     .stroke(.gray.opacity(0.8), lineWidth: 0.5 )
                             }
+                            .disabled(true)
+
                     
                 })
                 
